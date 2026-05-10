@@ -1,38 +1,17 @@
-/**
- * @fileoverview Punto de entrada principal de la API REST.
- * Configura Express, middlewares, rutas y levanta el servidor en puerto 3000.
- */
-
 import express from "express";
 import productRoutes from "./routes/products.routes.js";
 import categoryRoutes from "./routes/categories.routes.js";
+import userRoutes from "./routes/users.routes.js";
+import orderRoutes from "./routes/orders.routes.js";
 
-/**
- * Instancia principal de la aplicacion Express.
- * @type {import('express').Application}
- */
 const app = express();
 
-/**
- * Middleware global que parsea el body de requests con Content-Type application/json.
- * Llena req.body con los datos parseados.
- */
 app.use(express.json());
 
-/**
- * Registra las rutas de productos bajo prefijo /api.
- * Rutas finales: /api/products, /api/products/:id
- */
 app.use("/api", productRoutes);
-
-/**
- * Registra las rutas de categorias bajo prefijo /api.
- * Rutas finales: /api/categories
- */
 app.use("/api", categoryRoutes);
+app.use("/api", userRoutes);
+app.use("/api", orderRoutes);
 
-/**
- * Inicia el servidor HTTP escuchando en puerto 3000.
- */
 app.listen(3000);
 console.log("Server on port", 3000);
